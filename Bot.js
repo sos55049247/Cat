@@ -1,29 +1,29 @@
-const Discord = require("discord.js");
+﻿const Discord = require("discord.js");
 const config = require("./config.json");
-const bot = new Discord.Client({disaEveryoneble: true});
+const bot = new Discord.Client({disableEveryone: true});
 const fs = require("fs");
 bot.commands = new Discord.Collection();
 
 
 fs.readdir("./commands/", (err, files) => {
-  if (err) comsole.log(err);
+  if (err) console.log(err);
 
   let jsfile = files.filter(f => f.split(".").pop() === "js")
   if(jsfile.length <= 0){
-    console.log("No commands were found...")
+    console.log("沒有讀取到任何指令...")
     return;
   }
 
   jsfile.forEach((f, i) => {
     let props = require(`./commands/${f}`)
-    console.log(`${f} loaded!`)
+    console.log(`${f} 已載入!`)
     bot.commands.set(props.help.name, props);
   })
 })
 
 bot.on("ready", async () => {
-    console.log(`${bot.user.username} is online!`)
-    // bot.user.setActivity("Smile >v<!", {type: "STREAMING"});
+    console.log(`${bot.user.username} 已上線!`)
+     bot.user.setActivity("Princess Sweetness ♪", {type: "WATCHING"});
 });
 
 bot.on('message', async message => {
