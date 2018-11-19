@@ -10,19 +10,19 @@ fs.readdir("./commands/", (err, files) => {
 
   let jsfile = files.filter(f => f.split(".").pop() === "js")
   if(jsfile.length <= 0){
-    console.log("沒有讀取到任何指令...")
+    console.log("No commands were found...")
     return;
   }
 
   jsfile.forEach((f, i) => {
     let props = require(`./commands/${f}`)
-    console.log(`${f} 已載入!`)
+    console.log(`${f} loaded!`)
     bot.commands.set(props.help.name, props);
   })
 })
 
 bot.on("ready", async () => {
-    console.log(`${bot.user.username} 已上線!`)
+    console.log(`${bot.user.username} online!`)
      bot.user.setActivity("Princess Sweetness ♪", {type: "WATCHING"});
 });
 
